@@ -1,7 +1,9 @@
 package com.example;
 
+import com.example.enmu.Rank;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -24,4 +26,21 @@ public class PokerHandsTest {
     assertEquals(14, pokersOfWhite.get(4).getValue());
     assertEquals("H", pokersOfWhite.get(4).getSuit());
   }
+
+  @Test
+  public void should_return_straight_flush_when_countRank_given_pokers() {
+    PokerHands pokerHands = new PokerHands();
+    List<Poker> pokers = new ArrayList<>();
+    pokers.add(new Poker(3,"H"));
+    pokers.add(new Poker(4,"H"));
+    pokers.add(new Poker(5,"H"));
+    pokers.add(new Poker(6,"H"));
+    pokers.add(new Poker(7,"H"));
+    int rank = pokerHands.countRank(pokers);
+    assertEquals(Rank.STRAIGHT_FLUSH, rank);
+  }
+
+
+
+
 }
