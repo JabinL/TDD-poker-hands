@@ -56,7 +56,14 @@ public class PokerHands {
         if (isRankTwoPairs(pokers)) {
             return Rank.TWO_PAIRS;
         }
+        if(isRankPairs(pokers)){
+            return Rank.PAIR;
+        }
         return 0;
+    }
+
+    public boolean isRankPairs(List<Poker> pokers) {
+        return pokers.stream().map(Poker::getValue).collect(Collectors.toSet()).size() == 4;
     }
 
     public boolean isRankTwoPairs(List<Poker> pokers) {
