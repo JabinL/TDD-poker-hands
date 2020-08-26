@@ -5,6 +5,7 @@ import com.example.enmu.Rank;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class PokerHands {
@@ -47,8 +48,14 @@ public class PokerHands {
         if (isRankFourKind(pokers)) {
             return Rank.FOUR_KIND;
         }
-
+        if(isRankFullHouse(pokers)){
+            return Rank.FULL_HOUSE;
+        }
         return 0;
+    }
+
+    public boolean isRankFullHouse(List<Poker> pokers) {
+        return pokers.stream().map(Poker::getValue).collect(Collectors.toSet()).size() == 2;
     }
 
     public boolean isRankFourKind(List<Poker> pokers) {
@@ -56,6 +63,8 @@ public class PokerHands {
         return array[0].intValue() == array[3]
                 || array[1].intValue() == array[4];
     }
+
+
 
     public boolean isRankFlush(List<Poker> pokers) {
         return isFlush(pokers);
