@@ -59,7 +59,14 @@ public class PokerHands {
         if(isRankPairs(pokers)){
             return Rank.PAIR;
         }
+        if(isRankHighCard(pokers)){
+            return Rank.HIGH_CARD;
+        }
         return 0;
+    }
+
+    private boolean isRankHighCard(List<Poker> pokers) {
+        return pokers.stream().map(Poker::getValue).collect(Collectors.toSet()).size() == 5;
     }
 
     public boolean isRankPairs(List<Poker> pokers) {
