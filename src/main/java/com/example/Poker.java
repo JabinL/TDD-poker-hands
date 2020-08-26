@@ -39,4 +39,12 @@ public class Poker implements Comparable<Poker> {
   public int compareTo(Poker o) {
     return Integer.compare(this.value, o.value);
   }
+
+  @Override
+  public String toString() {
+    return "Poker{" +
+            "suit='" + suit + '\'' +
+            ", value=" + value +
+            '}';
+  }
 }

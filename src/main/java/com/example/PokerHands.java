@@ -53,12 +53,19 @@ public class PokerHands {
         if (isRankThreeKind(pokers)) {
             return Rank.THREE_KIND;
         }
+        if (isRankTwoPairs(pokers)) {
+            return Rank.TWO_PAIRS;
+        }
         return 0;
+    }
+
+    public boolean isRankTwoPairs(List<Poker> pokers) {
+        return pokers.stream().map(Poker::getValue).collect(Collectors.toSet()).size() == 3;
     }
 
     public boolean isRankThreeKind(List<Poker> pokers) {
         Integer[] array = pokers.stream().map(Poker::getValue).toArray(Integer[]::new);
-        return array[0].equals(array[2]) || array[1].equals(3)||array[2].equals(array[4]);
+        return array[0].equals(array[2]) || array[1].equals(array[3]) || array[2].equals(array[4]);
     }
 
     public boolean isRankFullHouse(List<Poker> pokers) {

@@ -105,4 +105,17 @@ public class PokerHandsTest {
         assertEquals(Rank.THREE_KIND, rank);
     }
 
+    @Test
+    public void should_return_two_pairs_when_countRank_given_pokers() {
+        PokerHands pokerHands = new PokerHands();
+        List<Poker> pokers = new ArrayList<>();
+        pokers.add(new Poker(3, "D"));
+        pokers.add(new Poker(3, "H"));
+        pokers.add(new Poker(7, "C"));
+        pokers.add(new Poker(7, "S"));
+        pokers.add(new Poker(9, "H"));
+        int rank = pokerHands.countRank(pokers);
+        assertEquals(Rank.TWO_PAIRS, rank);
+    }
+
 }
