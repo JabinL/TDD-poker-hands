@@ -65,4 +65,17 @@ public class PokerHandsTest {
         int rank = pokerHands.countRank(pokers);
         assertEquals(Rank.FLUSH, rank);
     }
+
+    @Test
+    public void should_return_four_kind_when_countRank_given_pokers() {
+        PokerHands pokerHands = new PokerHands();
+        List<Poker> pokers = new ArrayList<>();
+        pokers.add(new Poker(3, "D"));
+        pokers.add(new Poker(3, "H"));
+        pokers.add(new Poker(3, "C"));
+        pokers.add(new Poker(3, "S"));
+        pokers.add(new Poker(7, "H"));
+        int rank = pokerHands.countRank(pokers);
+        assertEquals(Rank.FOUR_KIND, rank);
+    }
 }

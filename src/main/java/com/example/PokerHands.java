@@ -30,30 +30,6 @@ public class PokerHands {
         return pokers;
     }
 
-    public int charToNumber(String item) {
-        int value = -1;
-        switch (item.charAt(0)) {
-            case 'T':
-                value = 10;
-                break;
-            case 'J':
-                value = 11;
-                break;
-            case 'Q':
-                value = 12;
-                break;
-            case 'K':
-                value = 13;
-                break;
-            case 'A':
-                value = 14;
-                break;
-            default:
-                value = (int) item.charAt(0) - (int) ('0');
-                break;
-        }
-        return value;
-    }
 
     public int countRank(List<Poker> pokers) {
         pokers =
@@ -68,7 +44,17 @@ public class PokerHands {
         if (isRankFlush(pokers)) {
             return Rank.FLUSH;
         }
+        if (isRankFourKind(pokers)) {
+            return Rank.FOUR_KIND;
+        }
+
         return 0;
+    }
+
+    public boolean isRankFourKind(List<Poker> pokers) {
+        Integer[] array = pokers.stream().map(Poker::getValue).toArray(Integer[]::new);
+        return array[0].intValue() == array[3]
+                || array[1].intValue() == array[4];
     }
 
     public boolean isRankFlush(List<Poker> pokers) {
@@ -100,5 +86,30 @@ public class PokerHands {
         String input = "Black: 2H 3D 5S 9C KD White: 2C 3H 4S 8C AH";
         PokerHands pokerHands = new PokerHands();
         pokerHands.inputStrTransToPokers(input, 1);
+    }
+
+    public int charToNumber(String item) {
+        int value = -1;
+        switch (item.charAt(0)) {
+            case 'T':
+                value = 10;
+                break;
+            case 'J':
+                value = 11;
+                break;
+            case 'Q':
+                value = 12;
+                break;
+            case 'K':
+                value = 13;
+                break;
+            case 'A':
+                value = 14;
+                break;
+            default:
+                value = (int) item.charAt(0) - (int) ('0');
+                break;
+        }
+        return value;
     }
 }
