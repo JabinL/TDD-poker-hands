@@ -40,7 +40,17 @@ public class PokerHandsTest {
     assertEquals(Rank.STRAIGHT_FLUSH, rank);
   }
 
-
-
+  @Test
+  public void should_return_straight_when_countRank_given_pokers() {
+    PokerHands pokerHands = new PokerHands();
+    List<Poker> pokers = new ArrayList<>();
+    pokers.add(new Poker(3,"D"));
+    pokers.add(new Poker(4,"H"));
+    pokers.add(new Poker(5,"H"));
+    pokers.add(new Poker(6,"H"));
+    pokers.add(new Poker(7,"H"));
+    int rank = pokerHands.countRank(pokers);
+    assertEquals(Rank.STRAIGHT, rank);
+  }
 
 }

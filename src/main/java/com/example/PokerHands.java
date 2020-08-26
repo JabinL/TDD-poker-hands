@@ -62,13 +62,18 @@ public class PokerHands {
     if (isRankStraightFlush(pokers)) {
       return Rank.STRAIGHT_FLUSH;
     }
+    if(isRankStraight(pokers)){
+      return Rank.STRAIGHT;
+    }
     return 0;
   }
 
   public boolean isRankStraightFlush(List<Poker> pokers) {
     return isStraight(pokers) && isFlush(pokers);
   }
-
+ public boolean isRankStraight(List<Poker> pokers){
+    return isStraight(pokers);
+ }
   public boolean isStraight(List<Poker> pokers) {
     for (int i = 0; i < pokers.size() - 1; i++) {
       if (pokers.get(i).getValue() + 1 != pokers.get(i + 1).getValue()) {
