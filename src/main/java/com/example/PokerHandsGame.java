@@ -45,8 +45,14 @@ public class PokerHandsGame {
                 return compareStraight(blackValue, whiteValue);
             case Rank.FLUSH:
                 return "Tie";
+            case Rank.FULL_HOUSE:
+                return compareFullHouse(blackValue, whiteValue);
         }
         return "";
+    }
+
+    private String compareFullHouse(List<Integer> blackValue, List<Integer> whiteValue) {
+        return blackValue.get(2)>whiteValue.get(2)?"Black win":"White win";
     }
 
     private String compareStraight(List<Integer> blackValue, List<Integer> whiteValue) {
