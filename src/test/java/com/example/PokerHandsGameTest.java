@@ -40,4 +40,12 @@ public class PokerHandsGameTest {
         String result = pokerHandsGame.run(input);
         assertEquals("White win",result);
     }
+
+    @Test
+    public void should_return_black_win_when_run_game_given_2H_5D_KS_8C_9D_2C_3H_4S_8C_5H() {
+        String input = "Black: 2H 5D KS 8C 9D White: 2C 3H 4S 8C 5H";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Black win",result);
+    }
+
 }
