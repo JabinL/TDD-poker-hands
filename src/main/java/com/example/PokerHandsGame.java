@@ -9,14 +9,12 @@ import java.util.stream.Collectors;
 public class PokerHandsGame {
 
     public PokerHands pokerHands = new PokerHands();
+    public static final int BLACK_POKERS = 1;
+    public static final int WHITE_POKERS = 2;
 
     public String run(String input) {
-        return getGameResult(input);
-    }
-
-    private String getGameResult(String input) {
-        List<Poker> black = pokerHands.inputStrTransToPokers(input, 1);
-        List<Poker> white = pokerHands.inputStrTransToPokers(input, 2);
+        List<Poker> black = pokerHands.inputStrTransToPokers(input, BLACK_POKERS);
+        List<Poker> white = pokerHands.inputStrTransToPokers(input, WHITE_POKERS);
         int blackRank = pokerHands.countRank(black);
         int whiteRank = pokerHands.countRank(white);
         if (blackRank > whiteRank) {
@@ -56,39 +54,39 @@ public class PokerHandsGame {
     }
 
     private String compareStraightFlush(List<Integer> blackValue, List<Integer> whiteValue) {
-        if(blackValue.get(4).equals(whiteValue.get(4))){
+        if (blackValue.get(4).equals(whiteValue.get(4))) {
             return "Tie";
         }
-        return blackValue.get(4)>whiteValue.get(4)?"Black win":"White win";
+        return blackValue.get(4) > whiteValue.get(4) ? "Black win" : "White win";
     }
 
     private String compareFourHouse(List<Integer> blackValue, List<Integer> whiteValue) {
-        return blackValue.get(2)>whiteValue.get(2)?"Black win":"White win";
+        return blackValue.get(2) > whiteValue.get(2) ? "Black win" : "White win";
     }
 
     private String compareFullHouse(List<Integer> blackValue, List<Integer> whiteValue) {
-        return blackValue.get(2)>whiteValue.get(2)?"Black win":"White win";
+        return blackValue.get(2) > whiteValue.get(2) ? "Black win" : "White win";
     }
 
     private String compareStraight(List<Integer> blackValue, List<Integer> whiteValue) {
-        if(blackValue.get(4).equals(whiteValue.get(4))){
+        if (blackValue.get(4).equals(whiteValue.get(4))) {
             return "Tie";
         }
-        return blackValue.get(4)>whiteValue.get(4)?"Black win":"White win";
+        return blackValue.get(4) > whiteValue.get(4) ? "Black win" : "White win";
     }
 
     private String compareThreeKind(List<Integer> blackValue, List<Integer> whiteValue) {
         Integer blackThreeKind = blackValue.get(2);
         Integer whiteThreeKind = whiteValue.get(2);
 
-        if(blackThreeKind>whiteThreeKind){
+        if (blackThreeKind > whiteThreeKind) {
             return "Black win";
-        }else if(blackThreeKind<whiteThreeKind){
+        } else if (blackThreeKind < whiteThreeKind) {
             return "White win";
         }
         blackValue = filterNumbers(blackValue, blackThreeKind);
         whiteValue = filterNumbers(whiteValue, whiteThreeKind);
-        return compareHighCard(blackValue,whiteValue);
+        return compareHighCard(blackValue, whiteValue);
 
     }
 
