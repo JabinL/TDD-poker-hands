@@ -129,7 +129,12 @@ public class PokerHandsGameTest {
         String result = pokerHandsGame.run(input);
         assertEquals("Black win",result);
     }
-
+    @Test
+    public void should_return_tie_win_when_run_game_given_straight_compare() {
+        String input = "Black: 3H 4D 6S 7C 5D White: 4D 5S 6C 7D 3D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Tie",result);
+    }
     @Test
     public void should_return_white_win_when_run_game_given_straight_compare() {
         String input = "Black: 3H 4D 6S 7C 5D White: 4D 5S 6C 7D 8D";
@@ -168,5 +173,24 @@ public class PokerHandsGameTest {
         String input = "Black: 2D 4S 2C 2H 2S White: 3H 3C 3S 3D 5H";
         String result = pokerHandsGame.run(input);
         assertEquals("White win",result);
+    }
+
+    @Test
+    public void should_return_black_win_when_run_game_given_straight_flush_compare() {
+        String input = "Black: 4D 5D 6D 7D 8D White: 3H 4D 6S 7C 5D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Black win",result);
+    }
+    @Test
+    public void should_return_white_win_when_run_game_given_straight_flush_compare() {
+        String input = "Black: 3H 4D 6S 7C 5D White: 4D 5D 6D 7D 8D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("White win",result);
+    }
+    @Test
+    public void should_return_tie_win_when_run_game_given_straight_flush_compare() {
+        String input = "Black: 3H 4H 6H 7H 5H White: 4D 5D 6D 7D 3D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Tie",result);
     }
 }

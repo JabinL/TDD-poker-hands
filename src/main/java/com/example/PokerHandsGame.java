@@ -49,8 +49,17 @@ public class PokerHandsGame {
                 return compareFullHouse(blackValue, whiteValue);
             case Rank.FOUR_KIND:
                 return compareFourHouse(blackValue, whiteValue);
+            case Rank.STRAIGHT_FLUSH:
+                return compareStraightFlush(blackValue, whiteValue);
         }
         return "";
+    }
+
+    private String compareStraightFlush(List<Integer> blackValue, List<Integer> whiteValue) {
+        if(blackValue.get(4).equals(whiteValue.get(4))){
+            return "Tie";
+        }
+        return blackValue.get(4)>whiteValue.get(4)?"Black win":"White win";
     }
 
     private String compareFourHouse(List<Integer> blackValue, List<Integer> whiteValue) {
@@ -62,6 +71,9 @@ public class PokerHandsGame {
     }
 
     private String compareStraight(List<Integer> blackValue, List<Integer> whiteValue) {
+        if(blackValue.get(4).equals(whiteValue.get(4))){
+            return "Tie";
+        }
         return blackValue.get(4)>whiteValue.get(4)?"Black win":"White win";
     }
 
