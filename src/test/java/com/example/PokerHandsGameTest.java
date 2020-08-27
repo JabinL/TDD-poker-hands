@@ -123,6 +123,18 @@ public class PokerHandsGameTest {
         assertEquals("Black win",result);
     }
 
+    @Test
+    public void should_return_black_win_when_run_game_given_straight_compare() {
+        String input = "Black: 4D 5S 6C 7D 8D White: 3H 4D 6S 7C 5D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Black win",result);
+    }
 
+    @Test
+    public void should_return_white_win_when_run_game_given_straight_compare() {
+        String input = "Black: 3H 4D 6S 7C 5D White: 4D 5S 6C 7D 8D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("White win",result);
+    }
 
 }

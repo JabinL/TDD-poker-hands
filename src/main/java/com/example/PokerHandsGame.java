@@ -41,8 +41,14 @@ public class PokerHandsGame {
                 return compareTwoPair(blackValue, whiteValue);
             case Rank.THREE_KIND:
                 return compareThreeKind(blackValue, whiteValue);
+            case Rank.STRAIGHT:
+                return compareStraight(blackValue, whiteValue);
         }
         return "";
+    }
+
+    private String compareStraight(List<Integer> blackValue, List<Integer> whiteValue) {
+        return blackValue.get(4)>whiteValue.get(4)?"Black win":"White win";
     }
 
     private String compareThreeKind(List<Integer> blackValue, List<Integer> whiteValue) {
