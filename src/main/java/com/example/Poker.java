@@ -10,11 +10,11 @@ public class Poker implements Comparable<Poker> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
 
-    Poker poker = (Poker) o;
+    Poker poker = (Poker) obj;
 
     return value == poker.value;
   }
