@@ -39,15 +39,32 @@ public class PokerHandsGame {
                 return comparePair(blackValue, whiteValue);
             case Rank.TWO_PAIRS:
                 return compareTwoPair(blackValue, whiteValue);
+            case Rank.THREE_KIND:
+                return compareThreeKind(blackValue, whiteValue);
         }
         return "";
+    }
+
+    private String compareThreeKind(List<Integer> blackValue, List<Integer> whiteValue) {
+        Integer blackThreeKind = blackValue.get(2);
+        Integer whiteThreeKind = whiteValue.get(2);
+
+        if(blackThreeKind>whiteThreeKind){
+            return "Black win";
+        }else if(blackThreeKind<whiteThreeKind){
+            return "White win";
+        }
+        blackValue = filterNumbers(blackValue, blackThreeKind);
+        whiteValue = filterNumbers(whiteValue, whiteThreeKind);
+        return compareHighCard(blackValue,whiteValue);
+
     }
 
     private String compareTwoPair(List<Integer> blackValue, List<Integer> whiteValue) {
         Integer blackValueSigleNum = blackValue.get(0) ^ blackValue.get(1) ^ blackValue.get(2) ^ blackValue.get(3) ^ blackValue.get(4);
         Integer whiteValueSigleNum = whiteValue.get(0) ^ whiteValue.get(1) ^ whiteValue.get(2) ^ whiteValue.get(3) ^ whiteValue.get(4);
-        blackValue = blackValue.stream().filter(item -> !item.equals(blackValueSigleNum)).collect(Collectors.toList());
-        whiteValue = whiteValue.stream().filter(item -> !item.equals(whiteValueSigleNum)).collect(Collectors.toList());
+        blackValue = filterNumbers(blackValue, blackValueSigleNum);
+        whiteValue = filterNumbers(whiteValue, whiteValueSigleNum);
         String res = compareHighCard(blackValue, whiteValue);
         if (res.equals("Tie")) {
             if (blackValueSigleNum.equals(whiteValueSigleNum)) {
@@ -56,6 +73,10 @@ public class PokerHandsGame {
             return blackValueSigleNum > whiteValueSigleNum ? "Black win" : "White win";
         }
         return res;
+    }
+
+    private List<Integer> filterNumbers(List<Integer> list, Integer number) {
+        return list.stream().filter(item -> !item.equals(number)).collect(Collectors.toList());
     }
 
     private String comparePair(List<Integer> blackValue, List<Integer> whiteValue) {

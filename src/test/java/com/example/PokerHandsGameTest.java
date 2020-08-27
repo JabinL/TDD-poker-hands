@@ -109,4 +109,20 @@ public class PokerHandsGameTest {
         String result = pokerHandsGame.run(input);
         assertEquals("White win",result);
     }
+    @Test
+    public void should_return_white_win_when_run_game_given_three_kind_in_compare() {
+        String input = "Black: 5H 5D 5S 9C TD White: 6H 6D 6S TC 9D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("White win",result);
+    }
+
+    @Test
+    public void should_return_black_win_when_run_game_given_three_kind_in_compare() {
+        String input = "Black: 8H 8D 8S 9C TD White: 6H 6D 6S TC 9D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Black win",result);
+    }
+
+
+
 }
