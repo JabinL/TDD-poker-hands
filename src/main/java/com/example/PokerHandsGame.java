@@ -43,6 +43,8 @@ public class PokerHandsGame {
                 return compareThreeKind(blackValue, whiteValue);
             case Rank.STRAIGHT:
                 return compareStraight(blackValue, whiteValue);
+            case Rank.FLUSH:
+                return "Tie";
         }
         return "";
     }

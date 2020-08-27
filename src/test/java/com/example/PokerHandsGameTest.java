@@ -137,4 +137,11 @@ public class PokerHandsGameTest {
         assertEquals("White win",result);
     }
 
+    @Test
+    public void should_return_tie_when_run_game_given_flush_compare() {
+        String input = "Black: 3H 4H 9H 7H 5H White: 4D 5D 6D 7D 9D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Tie",result);
+    }
+
 }
