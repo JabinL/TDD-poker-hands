@@ -61,5 +61,31 @@ public class PokerHandsGameTest {
         assertEquals("Tie",result);
     }
 
+    @Test
+    public void should_return_black_win_when_run_game_given_5H_5D_KS_8C_9D_2H_2D_KS_8C_9D() {
+        String input = "Black: 5H 5D KS 8C 9D White: 2H 2D KS 8C 9D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Black win",result);
+    }
 
+    @Test
+    public void should_return_white_win_when_run_game_given_2H_2D_KS_8C_9D_5H_5D_KS_8C_9D() {
+        String input = "Black: 2H 2D KS 8C 9D White: 5H 5D KS 8C 9D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("White win",result);
+    }
+
+    @Test
+    public void should_return_white_win_when_run_game_given_5H_5D_KS_8C_2D_5H_5D_KS_8C_9D() {
+        String input = "Black: 5H 5D KS 8C 2D White: 5H 5D KS 8C 9D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("White win",result);
+    }
+
+    @Test
+    public void should_return_tie_when_run_game_given_5H_5D_KS_8C_9D_5H_5D_KS_8C_9D() {
+        String input = "Black: 5H 5D KS 8C 9D White: 5H 5D KS 8C 9D";
+        String result = pokerHandsGame.run(input);
+        assertEquals("Tie",result);
+    }
 }

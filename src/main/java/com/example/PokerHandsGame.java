@@ -24,26 +24,46 @@ public class PokerHandsGame {
         } else if (blackRank < whiteRank) {
             return "White win";
         }
-        return compareSameRank(blackRank,black,white);
+        return compareSameRank(blackRank, black, white);
     }
 
     private String compareSameRank(int rank, List<Poker> black, List<Poker> white) {
-        List<Integer> blackValue=black.stream().sorted(Comparator.comparing(Poker::getValue))
+        List<Integer> blackValue = black.stream().sorted(Comparator.comparing(Poker::getValue))
                 .map(Poker::getValue).collect(Collectors.toList());
-        List<Integer>  whiteValue=white.stream().sorted(Comparator.comparing(Poker::getValue))
+        List<Integer> whiteValue = white.stream().sorted(Comparator.comparing(Poker::getValue))
                 .map(Poker::getValue).collect(Collectors.toList());
-        switch (rank){
+        switch (rank) {
             case Rank.HIGH_CARD:
-                return compareHighCard(blackValue,whiteValue);
+                return compareHighCard(blackValue, whiteValue);
+            case Rank.PAIR:
+                return comparePair(blackValue, whiteValue);
         }
-       return "";
+        return "";
+    }
+
+    private String comparePair(List<Integer> blackValue, List<Integer> whiteValue) {
+        Integer blackPair = blackValue.stream().collect(Collectors.groupingBy(Integer::valueOf))
+                .values()
+                .stream()
+                .sorted((a, b) -> b.size() - a.size())
+                .collect(Collectors.toList()).get(0).get(0);
+        Integer whitePair = whiteValue.stream().collect(Collectors.groupingBy(Integer::valueOf))
+                .values()
+                .stream()
+                .sorted((a, b) -> b.size() - a.size())
+                .collect(Collectors.toList()).get(0).get(0);
+
+        if(blackPair.equals(whitePair)){
+           return compareHighCard(blackValue, whiteValue);
+        }
+        return blackPair > whitePair ?"Black win":"White win";
     }
 
     private String compareHighCard(List<Integer> black, List<Integer> white) {
-        for(int i = 4; i>0; i--){
-            if(black.get(i)>white.get(i)){
+        for (int i = black.size() -1 ; i > 0; i--) {
+            if (black.get(i) > white.get(i)) {
                 return "Black win";
-            }else if(black.get(i)<white.get(i)){
+            } else if (black.get(i) < white.get(i)) {
                 return "White win";
             }
         }
