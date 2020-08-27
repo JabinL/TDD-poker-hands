@@ -26,10 +26,8 @@ public class PokerHandsGame {
     }
 
     private String compareSameRank(int rank, List<Poker> black, List<Poker> white) {
-        List<Integer> blackValue = black.stream().sorted(Comparator.comparing(Poker::getValue))
-                .map(Poker::getValue).collect(Collectors.toList());
-        List<Integer> whiteValue = white.stream().sorted(Comparator.comparing(Poker::getValue))
-                .map(Poker::getValue).collect(Collectors.toList());
+        List<Integer> blackValue = transPokerToValue(black);
+        List<Integer> whiteValue = transPokerToValue(white);
         switch (rank) {
             case Rank.HIGH_CARD:
                 return compareHighCard(blackValue, whiteValue);
@@ -50,7 +48,12 @@ public class PokerHandsGame {
             case Rank.STRAIGHT_FLUSH:
                 return compareStraightFlush(blackValue, whiteValue);
         }
-        return "";
+        return "Tie";
+    }
+
+    private List<Integer> transPokerToValue(List<Poker> pokers) {
+        return pokers.stream().sorted(Comparator.comparing(Poker::getValue))
+                .map(Poker::getValue).collect(Collectors.toList());
     }
 
     private String compareStraightFlush(List<Integer> blackValue, List<Integer> whiteValue) {
